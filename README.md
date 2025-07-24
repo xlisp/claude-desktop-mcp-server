@@ -22,6 +22,23 @@
 }
 ```
 
+* for file system
+
+```json
+
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "/Users/clojure/Desktop/quickstart-resources/weather-server-python/.venv/bin/python",
+      "args": [
+        "/Users/clojure/Desktop/quickstart-resources/weather-server-python/filesystem.py"
+      ]
+    }
+  }
+}
+
+```
+
 change config file , need ` pkill -f "Claude"  ` then restart Claude desktop
 
 ## run mcp server:
