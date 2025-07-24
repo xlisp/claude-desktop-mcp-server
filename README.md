@@ -108,3 +108,16 @@ ModuleNotFoundError: No module named 'httpx'
 uv not found ...
 ```
 
+## File System Mcp Server
+
+```
+
+(weather-server-python) ➜  weather-server-python git:(main) ✗ uv run filesystem.py 
+
+
+➜  weather-server-python git:(main) ✗ echo '{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "test", "version": "1.0"}}}' | uv --directory /Users/clojure/Desktop/quickstart-resources/weather-server-python run filesystem.py 
+
+{"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2024-11-05","capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"subscribe":false,"listChanged":false},"tools":{"listChanged":false}},"serverInfo":{"name":"filesystem-command","version":"1.12.1"}}}
+➜  weather-server-python git:(main) ✗ 
+
+```
