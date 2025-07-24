@@ -1,5 +1,7 @@
 # Claude Desktop MCP Server
 
+![](./demo3.png)
+
 ![](./demo1.png)
 ![](./demo2.png)
 
