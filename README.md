@@ -48,3 +48,16 @@ change config file , need ` pkill -f "Claude"  ` then restart Claude desktop
 ![](./demo2.png)
 
 
+## Extend: Git Operations MCP Server: 
+```
+$ uv run git_mcp_server.py
+```
+* add this json to mcp config
+```json
+    "git-operations": {
+      "command": "/Users/clojure/Desktop/filesystem-mcp-server/.venv/bin/python",
+      "args": [
+        "/Users/clojure/Desktop/filesystem-mcp-server/git_mcp_server.py"
+      ]
+    }
+```
