@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "/Users/clojure/Desktop/filesystem-mcp-server/.venv/bin/python",
+      "args": [
+        "/Users/clojure/Desktop/filesystem-mcp-server/filesystem.py"
+      ]
+    },
+    "git-operations": {
+      "command": "/Users/clojure/Desktop/filesystem-mcp-server/.venv/bin/python",
+      "args": [
+        "/Users/clojure/Desktop/filesystem-mcp-server/git_mcp_server.py"
+      ]
+    },
+    "clojure-mcp": {
+      "command": "/bin/bash",
+      "args": [
+          "-c",
+          "clojure -X:mcp :port 7888"
+      ]
+    }
+  }
+}
