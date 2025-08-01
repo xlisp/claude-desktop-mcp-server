@@ -6,21 +6,34 @@ import pandas as pd
 import networkx as nx
 from typing import Any, List, Optional, Union
 import json
-import base64
-import io
+import tempfile
+import os
+from datetime import datetime
 from mcp.server.fastmcp import FastMCP
 
 # Initialize FastMCP server
 mcp = FastMCP("visualization")
 
-def encode_plot_to_base64() -> str:
-    """将matplotlib图形编码为base64字符串"""
-    buffer = io.BytesIO()
-    plt.savefig(buffer, format='png', dpi=300, bbox_inches='tight')
-    buffer.seek(0)
-    image_base64 = base64.b64encode(buffer.getvalue()).decode()
-    plt.close()  # 关闭图形释放内存
-    return image_base64
+def save_and_show_plot(title: str = "plot") -> str:
+    """保存图表到临时目录并显示"""
+    # 创建临时目录
+    temp_dir = tempfile.gettempdir()
+    
+    # 生成带时间戳的文件名
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"{title}_{timestamp}.png"
+    filepath = os.path.join(temp_dir, filename)
+    
+    # 保存图片
+    plt.savefig(filepath, format='png', dpi=300, bbox_inches='tight')
+    
+    # 显示图片
+    plt.show()
+    
+    # 不立即关闭，让用户能看到图片
+    # plt.close() 
+    
+    return f"图表已保存到: {filepath} 并已显示"
 
 @mcp.tool()
 async def create_relationship_graph(
@@ -75,7 +88,7 @@ async def create_relationship_graph(
         plt.axis('off')
         plt.tight_layout()
         
-        return encode_plot_to_base64()
+        return save_and_show_plot("relationship_graph")
         
     except Exception as e:
         return f"创建关系图时出错: {str(e)}"
@@ -130,7 +143,7 @@ async def create_scatter_plot(
         plt.grid(True, alpha=0.3)
         plt.tight_layout()
         
-        return encode_plot_to_base64()
+        return save_and_show_plot("scatter_plot")
         
     except Exception as e:
         return f"创建散点图时出错: {str(e)}"
@@ -207,7 +220,7 @@ async def create_3d_plot(
         ax.set_zlabel(z_label)
         ax.set_title(title, fontsize=16, fontweight='bold')
         
-        return encode_plot_to_base64()
+        return save_and_show_plot("3d_plot")
         
     except Exception as e:
         return f"创建3D图时出错: {str(e)}"
@@ -258,7 +271,7 @@ async def create_classification_plot(
         plt.grid(True, alpha=0.3)
         plt.tight_layout()
         
-        return encode_plot_to_base64()
+        return save_and_show_plot("classification_plot")
         
     except Exception as e:
         return f"创建分类图时出错: {str(e)}"
@@ -293,7 +306,7 @@ async def create_histogram(
         plt.grid(True, alpha=0.3, axis='y')
         plt.tight_layout()
         
-        return encode_plot_to_base64()
+        return save_and_show_plot("histogram")
         
     except Exception as e:
         return f"创建直方图时出错: {str(e)}"
@@ -332,7 +345,7 @@ async def create_line_plot(
         plt.grid(True, alpha=0.3)
         plt.tight_layout()
         
-        return encode_plot_to_base64()
+        return save_and_show_plot("line_plot")
         
     except Exception as e:
         return f"创建折线图时出错: {str(e)}"
@@ -371,7 +384,7 @@ async def create_heatmap(
         plt.title(title, fontsize=16, fontweight='bold')
         plt.tight_layout()
         
-        return encode_plot_to_base64()
+        return save_and_show_plot("heatmap")
         
     except Exception as e:
         return f"创建热力图时出错: {str(e)}"
